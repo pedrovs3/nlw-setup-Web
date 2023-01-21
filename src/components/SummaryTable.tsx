@@ -1,5 +1,8 @@
 import {HabitDay} from "./HabitDay";
 import {generateRangeBetweenDates} from "../utils/generate-range-between-dates";
+import { api } from "../lib/axios";
+import {useEffect, useState} from "react";
+import dayjs from "dayjs";
 
 const weekDays = ['D',
 	'S',
@@ -14,7 +17,23 @@ const summaryDates = generateRangeBetweenDates();
 const MINIMUM_SUMMARY_DATES_SIZE = 18 * 7 // 18 weeks
 const amountOfDaysToFill = MINIMUM_SUMMARY_DATES_SIZE - summaryDates.length
 
+interface SummaryProps {
+	id: string,
+	date: string,
+	amount: number,
+	completed: number
+}
+
 export const SummaryTable = () => {
+	const [summary, setSummary] = useState<SummaryProps[]>([])
+
+	useEffect(() => {
+		api.get('/summary').then(response => {
+			console.log(response.data)
+			setSummary(response.data.data)
+		})
+	}, [])
+
   return (
 		<div className={'w-full flex justify-center my-10'}>
 			<div className={'grid grid-rows-7 grid-flow-row gap-3'}>
@@ -29,8 +48,17 @@ export const SummaryTable = () => {
 
 			<div className={'grid grid-rows-7 grid-flow-col gap-3'}>
 				{summaryDates.map(date => {
+					const dayInSummary = summary.find(day => {
+						return dayjs(date).isSame(day.date, 'day')
+					});
+
 					return (
-							<HabitDay key={date.toString()}/>
+							<HabitDay
+									key={date.toString()}
+									date={date}
+									amount={dayInSummary?.amount}
+									completed={dayInSummary?.completed}
+									/>
 					)
 				})}
 

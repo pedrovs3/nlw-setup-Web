@@ -1,4 +1,5 @@
 import './assets/styles/styles.css'
+import './lib/dayjs';
 import { Plus } from 'phosphor-react'
 
 import {HabitDay} from "./components/HabitDay";
