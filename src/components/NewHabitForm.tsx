@@ -67,12 +67,12 @@ export function NewHabitForm() {
 					availableWeekDays.map((weekDay, index) => (
 							<Checkbox.Root
 									key={weekDay}
-									className={'flex items-center gap-2 group'}
+									className={'flex items-center gap-2 group focus:outline-none'}
 									checked={weekDays.includes(index)}
 									onCheckedChange={() => handleToggleWeekDay(index)}
 							>
 
-								<div className={'checkbox h-8 w-8 flex items-center justify-center border-2 group-data-[state=checked]:bg-violet-600 group-data-[state=checked]:border-violet-500'}>
+								<div className={'checkbox h-8 w-8 flex items-center justify-center border-2 group-data-[state=checked]:bg-violet-600 group-data-[state=checked]:border-violet-500 transition-colors group-focus:ring-2 group-focus:ring-violet-700 group-focus:ring-offset-2 group-focus:ring-offset-zinc-800'}>
 									<Checkbox.Indicator>
 										<Check size={20} className={'text-white'}/>
 									</Checkbox.Indicator>
@@ -88,7 +88,7 @@ export function NewHabitForm() {
 
 
 			<button
-				className={'btn btn-success mt-6 flex items-center gap-3 font-bold '}
+				className={'btn btn-success mt-6 flex items-center gap-3 font-bold hover:bg-green-500 transition-colors'}
 				type={'submit'}>
 				<Check size={20} weight={'bold'}/>
 				Confirmar
