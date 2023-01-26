@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-	baseURL: 'http://127.0.0.1:3333/.netlify/functions/server'
+	baseURL: 'http://20.169.208.247'
 })
